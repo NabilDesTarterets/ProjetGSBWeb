@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="models\mesexceptions\Serreurs.cs" />
+    <None Include="models\mesexceptions\MonException.cs" />
     <None Include="models\metier\Praticien.cs" />
     <Compile Include="Models/ErrorViewModel.fs" />
     <Compile Include="Controllers/HomeController.fs" />
@@ -16,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\MesExceptions\" />
     <None Include="models\dao\ServicePraticien.cs" />
     <None Include="Models\Persistance\Connexion.cs" />
     <None Include="Models\Persistance\DBInterface.cs" />
