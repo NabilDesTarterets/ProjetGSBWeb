@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="models\metier\Praticien.cs" />
     <Compile Include="Models/ErrorViewModel.fs" />
     <Compile Include="Controllers/HomeController.fs" />
     <Compile Include="Program.fs" />
@@ -13,5 +14,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.5" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="models\dao\ServicePraticien.cs" />
+    <None Include="Models\Persistance\Connexion.cs" />
+    <None Include="Models\Persistance\DBInterface.cs" />
+    <Folder Include="Models\Dao\" />
+  </ItemGroup>
+
+  <ItemGroup />
 
 </Project>
