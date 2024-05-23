@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<ProjetGSBWeb.Models.Metier.Praticien>
+
+<div>
+    <h2>Liste des praticiens</h2>
+    <ul>
+        @foreach (var praticien in Model)
+        {
+            <li>
+                <strong>Nom :</strong> @praticien.Nom_praticien<br />
+                <strong>Ville :</strong> @praticien.Ville_praticien<br />
+                <strong>Coefficient de notoriété :</strong> @praticien.Coef_notoriete
+            </li>
+        }
+    </ul>
+</div>

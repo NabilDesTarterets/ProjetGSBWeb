@@ -1,0 +1,77 @@
+﻿@model System.Data.DataTable
+@using System.Data;
+@{
+    ViewBag.Title = "Liste des Praticiens";
+    Layout = "~/Views/Shared/_LayoutGSB.cshtml";
+}
+
+@using (Html.BeginForm("RechercherPraticienNom", "Praticien", FormMethod.Post, new { @class = "mt-5" }))
+{
+    <div class="container">
+        <h1 class="mb-4">Recherche d'un praticien par nom ou type</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <select id="nomPraticien" name="nomPraticien" class="form-select mb-3">
+                    @foreach (DataRow dataRow in ViewBag.NomPraticiens.Rows)
+                    {
+                        <option value="@dataRow["id_praticien"]">@dataRow["nom_praticien"].ToString()</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <select id="typePraticien" name="typePraticien" class="form-select mb-3">
+                    @foreach (DataRow dataRow in ViewBag.TypesPraticiens.Rows)
+                    {
+                        <option value="@dataRow["id_type_praticien"]">@dataRow["id_type_praticien"].ToString()</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="praticienDetails" class="container mt-4"></div>
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function fetchPraticienDetails(id) {
+            $.ajax({
+                url: '@Url.Action("GetPraticienDetails", "Praticien")',
+                type: 'GET',
+                data: { id: id },
+                success: function (data) {
+                    $('#praticienDetails').html(data);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+        function fetchPraticiensByType(idTypePraticien) {
+            $.ajax({
+                url: '@Url.Action("GetPraticiensByType", "Praticien")',
+                type: 'GET',
+                data: { idTypePraticien: idTypePraticien },
+                success: function (data) {
+                    $('#praticienDetails').html(data);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+        $('#nomPraticien').change(function () {
+            var idPraticien = $(this).val();
+            fetchPraticienDetails(idPraticien);
+        });
+
+        $('#typePraticien').change(function () {
+            var idTypePraticien = $(this).val();
+            fetchPraticiensByType(idTypePraticien);
+        });
+    </script>
+}
+

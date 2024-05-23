@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Connexion";
+    Layout = "/Views/Shared/_LayoutGSB.cshtml";
+}
+
+<div id="gsb-form row">
+    <form asp-controller= "Connexion" asp-action="Controle" class="login-form" method="post">
+        <div class="form-horizontal">
+            <h1>Connexion</h1>
+            <hr />
+            <div class="form-group">
+                <label class="control-label col-md-2" for="login">Identifiant</label>
+                <div class="col-md-10">
+                    <input type="text" id="login" name="login" class="form-control text-box single-line" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="pwd">Mot de passe</label>
+                <div class="col-md-10">
+                    <input type="password" id="pwd" name="pwd" class="form-control text-box single-line" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-2">
+                    <input type="submit" value="Se Connecter" class="btn btn-default btn-success" />
+                </div>
+                <br />
+                <div class="col-md-2 col-sm-2">
+                    @Html.ActionLink("Retourner", "", "", null, new { @class = "btn btn-default btn-primary"})
+                </div>
+            </div>
+        </div>
+    </form>
+    
+</div>

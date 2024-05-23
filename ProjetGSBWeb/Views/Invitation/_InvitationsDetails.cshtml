@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<ProjetGSBWeb.Models.Metier.Invitation>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Thème de l'activité</th>
+                    <th>Lieu de l'activité</th>
+                    <th>Motif de l'activité</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.Count; i++)
+                {
+                    <tr class="@(i % 2 == 0 ? "bg-white" : "bg-light")">
+                        <td>@Model[i].Theme_activite</td>
+                        <td>@Model[i].Lieu_activite</td>
+                        <td>@Model[i].Motif_activite</td>
+                        <td class="py-2 px-3">
+                            <a href="@Url.Action("ModifierInvitation", "Invitation", new { idPraticien = Model[i].Id_praticien, idActivite = Model[i].Id_activite_compl })" class="btn btn-primary">Modifier</a>
+                        </td>
+
+
+                        <td class="py-2 px-3">
+                            <form method="post" action="@Url.Action("SupprimerInvitation", "Invitation")" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette invitation ?')">
+                                <input type="hidden" name="idPraticien" value="@Model[i].Id_praticien" />
+                                <input type="hidden" name="idActivite" value="@Model[i].Id_activite_compl" />
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>Aucune invitation trouvée.</p>
+}
+
+
+
+

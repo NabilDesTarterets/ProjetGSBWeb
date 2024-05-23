@@ -1,30 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="models\mesexceptions\Serreurs.cs" />
-    <None Include="models\mesexceptions\MonException.cs" />
-    <None Include="models\metier\Praticien.cs" />
-    <Compile Include="Models/ErrorViewModel.fs" />
-    <Compile Include="Controllers/HomeController.fs" />
-    <Compile Include="Program.fs" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="MySql.Data" Version="8.4.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\MesExceptions\" />
-    <None Include="models\dao\ServicePraticien.cs" />
-    <None Include="Models\Persistance\Connexion.cs" />
-    <None Include="Models\Persistance\DBInterface.cs" />
-    <Folder Include="Models\Dao\" />
-  </ItemGroup>
-
-  <ItemGroup />
 
 </Project>

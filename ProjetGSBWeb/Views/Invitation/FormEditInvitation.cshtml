@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model ProjetGSBWeb.Models.Metier.Invitation
+
+@{
+    ViewBag.Title = "Modifier l'invitation";
+    Layout = "~/Views/Shared/_LayoutGSB.cshtml";
+}
+
+
+<div class="container mt-5">
+    <h1>Modifier l'invitation</h1>
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm("confirmUpdate", "Invitation", FormMethod.Post))
+            {
+            @Html.AntiForgeryToken() <!-- Pour éviter les attaques CSRF -->
+            <!-- Champ caché pour stocker l'ancien ID de l'activité complémentaire -->
+            <input type="hidden" id="oldIdActiviteCompl" name="oldIdActiviteCompl" value="@ViewBag.Invitation.Id_activite_compl" />
+
+            <div class="mb-3">
+                <label for="idPraticien" class="form-label">ID du praticien :</label>
+                <input type="text" id="idPraticien" name="idPraticien" value="@ViewBag.Invitation.Id_praticien" class="form-control" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label for="motifActivites" class="form-label">Activité complémentaire :</label>
+                <select id="motifActivites" name="motifActivites" class="form-select">
+                    @foreach (var motifActivite in ViewBag.MotifActivites)
+                    {
+                    <option value="@motifActivite">@motifActivite</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="specialiste" class="form-label">Spécialiste :</label>
+                <input type="text" id="specialiste" name="specialiste" pattern="[O|N]" title="Veuillez saisir 'O' ou 'N'" maxlength="1" class="form-control" />
+                <small id="specialisteHelp" class="form-text text-muted">Veuillez saisir 'O' pour Oui ou 'N' pour Non.</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Votre script JavaScript ici, si nécessaire
+</script>
+}

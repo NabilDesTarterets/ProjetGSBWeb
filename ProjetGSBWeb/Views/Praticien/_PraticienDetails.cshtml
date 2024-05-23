@@ -1,0 +1,127 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model ProjetGSBWeb.Models.Metier.Praticien
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du praticien</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+        $('#voirDetails').click(function () {
+            var idPraticien = $(this).data('id');
+            if (idPraticien !== null && idPraticien !== undefined) {
+                $.ajax({
+                    url: '@Url.Action("GetInvitationsDetails", "Invitation")',
+                    type: 'GET',
+                    data: { id: idPraticien },
+                    success: function (data) {
+                        $('#InvitationsDetails').html(data);
+                        $('#myModal').modal('show'); // Ouvrir la modal
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            } else {
+                console.log("L'ID du praticien est null ou indéfini.");
+            }
+        });
+
+
+    </script>
+</head>
+<body>
+
+    @if (Model != null)
+    {
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="fw-bold">Nom :</p>
+                    </div>
+                    <div class="col-md-8">
+                        <p>@Model.Nom_praticien</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="fw-bold">Ville :</p>
+                    </div>
+                    <div class="col-md-8">
+                        <p>@Model.Ville_praticien</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="fw-bold">Coefficient de notoriété :</p>
+                    </div>
+                    <div class="col-md-8">
+                        <p>@Model.Coef_notoriete</p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <button class="voirDetails btn btn-primary" id="voirDetails" data-id="@Model.Id_praticien">Voir</button>
+    <br />
+    }
+    else
+    {
+    <p>Aucun détail de praticien disponible.</p>
+    }
+
+
+
+
+
+
+    <br />
+    <div class="form-group">
+        <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+            @Html.ActionLink("Retourner à l'accueil", "Index", "Home", null, new { @class = "btn btn-default btn-primary" })
+        </div>
+    </div>
+
+    <!-- Ajoutez cette balise modal à la fin de votre page, juste avant la balise de fermeture du corps (</body>) -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Détails des invitations</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenu de votre div InvitationsDetails -->
+                    <div id="InvitationsDetails">
+                        <!-- Le contenu de la vue partielle sera injecté ici -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+
+

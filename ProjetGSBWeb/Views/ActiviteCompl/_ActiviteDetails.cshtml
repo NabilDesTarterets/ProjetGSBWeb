@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<ProjetGSBWeb.Models.Metier.ActiviteCompl>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="container">
+        @foreach (var activite in Model)
+        {
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Activité ID: @activite.Id_activite_compl</h5>
+                    <p class="card-text">
+                        <strong>Lieu :</strong> @activite.Lieu_activite <br />
+                        <!-- Ajoutez d'autres propriétés si nécessaire -->
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Aucune activité trouvée pour ce lieu.</p>
+}

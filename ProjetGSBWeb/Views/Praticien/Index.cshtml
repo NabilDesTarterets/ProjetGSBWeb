@@ -1,0 +1,42 @@
+﻿@model System.Data.DataTable
+@using System.Data;
+@{
+    ViewBag.Title = "Liste des Praticiens";
+    Layout = "~/Views/Shared/_LayoutGSB.cshtml";
+}
+@if (Model != null)
+{
+    <div class="container">
+        <div class="col-md-8 col-sm-8">
+            <div class="blanc">
+                <h1>Liste des Praticiens</h1>
+            </div>
+
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>ID praticien</th>
+                        <th>Nom praticien</th>
+                        <th>Ville</th>
+                        <th>Coefficient de notoriété</th>
+                    </tr>
+                </thead>
+                @foreach (DataRow dataRow in Model.Rows)
+                {
+                    <tr>
+                        <td>@dataRow["Id_praticien"]</td>
+                        <td>@dataRow["Nom_praticien"]</td>
+                        <td>@dataRow["Ville_praticien"]</td>
+                        <td>@dataRow["Coef_notoriete"]</td>
+    
+                    </tr>
+                }
+            </table>
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                    @Html.ActionLink("Retourner à l'accueil", "Index", "Home", null, new { @class = "btn btn-default btn-primary" })
+                </div>
+            </div>
+        </div>
+    </div>
+}

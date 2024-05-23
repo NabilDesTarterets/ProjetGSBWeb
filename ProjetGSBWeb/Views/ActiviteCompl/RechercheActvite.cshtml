@@ -1,0 +1,52 @@
+﻿@model System.Data.DataTable
+@using System.Data;
+@{
+    ViewBag.Title = "Liste des Activités";
+    Layout = "~/Views/Shared/_LayoutGSB.cshtml";
+}
+
+@using (Html.BeginForm("RechercherActiviteLieu", "ActiviteCompl", FormMethod.Post, new { @class = "mt-5" }))
+{
+    <div class="container">
+        <h1 class="mb-4">Recherche d'une activité par lieu</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <select id="lieu_Activite" name="lieu_Activite" class="form-select mb-3">
+                    <option value="">Sélectionnez un lieu</option>
+                    @foreach (DataRow dataRow in ViewBag.lieuxActivites.Rows)
+                    {
+                        <option value="@dataRow["lieu_Activite"].ToString()">@dataRow["lieu_Activite"].ToString()</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="activiteDetails" class="container mt-4"></div>
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#lieu_Activite').change(function () {
+                var lieu = $(this).val();
+                fetchActiviteDetails(lieu);
+            });
+        });
+
+        function fetchActiviteDetails(lieu) {
+            $.ajax({
+                url: '@Url.Action("GetActiviteDetails", "ActiviteCompl")',
+                type: 'GET',
+                data: { lieu: lieu },
+                success: function (data) {
+                    $('#activiteDetails').html(data);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+    </script>
+}

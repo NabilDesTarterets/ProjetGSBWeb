@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ProjetGSBWeb.Models.Metier.Invitation
+@{
+    ViewBag.Title = "Ajouter une invitation";
+    Layout = "~/Views/Shared/_LayoutGSB.cshtml";
+}
+
+<div class="container mt-5">
+    <h1>Ajouter une invitation</h1>
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm("AddInvitation", "Invitation", FormMethod.Post))
+            {
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label for="idPraticien" class="form-label">Praticien :</label>
+                <select id="idPraticien" name="idPraticien" class="form-select" required>
+                    @foreach (var praticien in ViewBag.Praticiens)
+                    {
+                    <option value="@praticien.Id_praticien">@praticien.Nom_praticien</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="motifActivite" class="form-label">Activité complémentaire :</label>
+                <select id="motifActivite" name="motifActivite" class="form-select" required>
+                    @foreach (var motifActivite in ViewBag.MotifActivites)
+                    {
+                    <option value="@motifActivite">@motifActivite</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="specialiste" class="form-label">Spécialiste :</label>
+                <input type="text" id="specialiste" name="specialiste" pattern="[O|N]" title="Veuillez saisir 'O' ou 'N'" maxlength="1" class="form-control" required />
+                <small id="specialisteHelp" class="form-text text-muted">Veuillez saisir 'O' pour Oui ou 'N' pour Non.</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            }
+        </div>
+    </div>
+</div>
+
+

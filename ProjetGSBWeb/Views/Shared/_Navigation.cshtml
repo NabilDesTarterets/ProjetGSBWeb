@@ -1,8 +1,10 @@
+﻿@using Microsoft.AspNetCore.Http;﻿
+@using ProjetGSBWeb.Controllers;
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        @Html.ActionLink("Web GSB", "Index", "Home", new { area = "" }, new { @class =
-        "navbar-brand" })
-        <button class="navbar-toggler" type="button" data-toggle="collapse" datatarget="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        @Html.ActionLink("ProjetGSBWeb", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,29 +12,38 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Connexion
+                        Compte
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" asp-area="" asp-controller="Connexion"
-                               asp-action="Index">Connexion</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Connexion" asp-action="Index">Connexion</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" asp-area="" asp-controller="Connexion"
-                               asp-action="Logout">D�connexion</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Connexion" asp-action="Deconnexion">Déconnexion</a>
                         </li>
+                    </ul>
+                </li>
+                @if (Context.Session.GetString("loginVisiteur") == "1")
+                {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Interroger
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Praticien" asp-action="Index">Liste des Praticiens</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Praticien" asp-action="RechercheNom">Recherche Praticien par nom</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="ActiviteCompl" asp-action="RechercheActvite">Recherche Activité Compl. sur son lieu</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        G�rer
+                        Gérer
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">Gestion</li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Praticien" asp-action="Ajout">Lister praticien</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Invitation" asp-action="Ajout">Ajouter invitation à une activité complémentaire</a></li>
                     </ul>
                 </li>
+                }
             </ul>
         </div>
     </div>
